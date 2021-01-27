@@ -1,28 +1,23 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+
+import { cellAnimations } from './cell.animations';
 
 @Component({
   selector: 'app-cell',
   templateUrl: './cell.component.html',
   styleUrls: ['./cell.component.css'],
-  animations: [
-    trigger('toggleDisplay', [
-      state('notPopulated', style({ width: 0, height: 0 })),
-      state('populated', style({ width: '12vmin', height: '12vmin' })),
-      transition('notPopulated => populated', [
-        animate('350ms')
-      ])
-    ])
-  ]
+  animations: cellAnimations()
 })
 export class CellComponent {
   @Input() value: string;
   @Input() canHighlight: boolean;
   @Output() cellClicked = new EventEmitter();
-  cellState = 'notPopulated';
+  cellState: string;
 
-  ngOnInit() {
-    console.log('Initializing Cell');
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes?.value?.currentValue === '') {
+      this.cellState = 'notPopulated';
+    }
   }
 
   onCellClicked(): void {

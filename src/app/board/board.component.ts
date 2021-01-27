@@ -18,7 +18,7 @@ export class BoardComponent {
     return this.winningCombination && this.winningCombination.indexOf(cellIndex) >= 0;
   }
 
-  cellByIndex(_: number, value: string): boolean {
-    return value !== '';
+  cellByIndex(index: number): number {
+    return index;
   }
 }
