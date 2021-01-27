@@ -1,0 +1,7 @@
+<div id="board">
+  <app-cell
+    *ngFor="let cellValue of cellValues; let cellIndex = index; trackBy:cellByValue"
+    [value]="cellValue"
+    [canHighlight]="canHighlight(cellIndex)"
+    (cellClicked)="triggerCellClicked(cellIndex)"></app-cell>
+</div>

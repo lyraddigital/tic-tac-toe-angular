@@ -1,0 +1,7 @@
+<button 
+  class="cell"
+  [class.winner]="canHighlight" 
+  (click)="onCellClicked()">
+  <span 
+    class="cell-content" [@toggleDisplay]="cellState">{{value}}</span>
+</button>
