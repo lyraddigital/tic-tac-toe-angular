@@ -16,7 +16,7 @@ export class WinnerService {
     8: [[6, 7], [2, 5], [0, 4]]
   };
 
-  calculateWinner(cellValues: Array<string>, numberOfTurnsLeft: number, currentCellIndex: number): CalcResult {
+  public calculateWinner(cellValues: Array<string>, numberOfTurnsLeft: number, currentCellIndex: number): CalcResult {
     const winningRanges = this.winningMatrix[currentCellIndex];
     const currentValue = cellValues[currentCellIndex];
 

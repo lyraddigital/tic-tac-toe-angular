@@ -18,7 +18,7 @@ export class GameComponent {
     private modalService: ModalService,
     private winnerService: WinnerService
   ) {
-    this.resetGame();
+    this.startNewGame();
   }
 
   cellClicked(cellIndex: number): void {
@@ -32,7 +32,7 @@ export class GameComponent {
       if (calcResult.hasResult) {
         this.winningCombination = calcResult.winningCombination;
         this.modalService.showResultModal(calcResult.winner).onClosed.subscribe(() => {
-          this.resetGame();
+          this.startNewGame();
         });
       }
     }
@@ -42,7 +42,7 @@ export class GameComponent {
     return this.cellValues[cellIndex] === '';
   }
 
-  private resetGame(): void {
+  private startNewGame(): void {
     this.xIsNext = true;
     this.cellValues = ['', '', '', '', '', '', '', '', ''];
     this.numberOfTurns = this.cellValues.length;

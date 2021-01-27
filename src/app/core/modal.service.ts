@@ -16,7 +16,7 @@ export class ModalService {
     this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
-  showResultModal(winner: string): Modal {
+  public showResultModal(winner: string): Modal {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ResultModalComponent);
     const modalComponentRef = componentFactory.create(this.injector);
     const overlayElement = ((modalComponentRef).hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;

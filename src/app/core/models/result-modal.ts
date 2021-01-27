@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 
 export class Modal {
-    onClosed: Subject<any>;
+    public onClosed: Subject<any>;
 
     constructor() {
         this.onClosed = new Subject<any>();
@@ -9,7 +9,7 @@ export class Modal {
 }
 
 export class ResultModal extends Modal {
-    close(): void {
+    public close(): void {
         this.onClosed.next();
         this.onClosed.complete();
     }
