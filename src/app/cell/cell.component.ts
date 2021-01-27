@@ -21,6 +21,10 @@ export class CellComponent {
   @Output() cellClicked = new EventEmitter();
   cellState = 'notPopulated';
 
+  ngOnInit() {
+    console.log('Initializing Cell');
+  }
+
   onCellClicked(): void {
     this.cellClicked.emit();
     this.cellState = 'populated';

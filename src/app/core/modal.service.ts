@@ -1,4 +1,4 @@
-import { ApplicationRef, ComponentFactoryResolver, ElementRef, EmbeddedViewRef, Injectable, Injector, Renderer2, RendererFactory2 } from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector, Renderer2, RendererFactory2 } from '@angular/core';
 
 import { Modal, ResultModal } from './models/result-modal';
 import { ResultModalComponent } from '../shared/result-modal/result-modal.component';
@@ -6,7 +6,6 @@ import { ResultModalComponent } from '../shared/result-modal/result-modal.compon
 @Injectable({ providedIn: 'root'})
 export class ModalService {
   private renderer: Renderer2;
-  private placeHolderElement: HTMLElement;
 
   constructor(
     private applicationRef: ApplicationRef,
@@ -17,18 +16,7 @@ export class ModalService {
     this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
-  setModalPlaceholder(elementRef: ElementRef): void {
-    this.placeHolderElement = elementRef.nativeElement as HTMLElement;
-  }
-
   showResultModal(winner: string): Modal {
-    if (!this.placeHolderElement) {
-      throw new Error(`
-        No placeholder element was set that the modal
-        could attach itself to
-      `);
-    }
-
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ResultModalComponent);
     const modalComponentRef = componentFactory.create(this.injector);
     const overlayElement = ((modalComponentRef).hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
@@ -43,7 +31,7 @@ export class ModalService {
       resultModal.close();
     });
 
-    this.renderer.appendChild(this.placeHolderElement, overlayElement);
+    this.renderer.appendChild(document.body, overlayElement);
 
     return resultModal;
   }
